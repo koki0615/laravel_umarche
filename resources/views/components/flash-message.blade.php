@@ -1,4 +1,4 @@
-@pops(['status' => 'info'])
+@props(['status' => 'info'])
 
 @php
     if($status === 'info'){ $bgColor = 'bg-blue-300';}
