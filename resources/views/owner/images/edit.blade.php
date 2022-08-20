@@ -45,7 +45,10 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> f1419c66da1aeffabc0b660a52b203b344246f24
   <script>
     function deletePost(e) {
       'use strict';
