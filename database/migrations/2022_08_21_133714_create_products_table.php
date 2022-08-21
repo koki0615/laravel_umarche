@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('secondary_category_id')
             ->constrained();
             $table->foreignId('image1')
+            ->nullable()
             ->constrained('images');
             $table->timestamps();
         });
