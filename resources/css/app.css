@@ -155,3 +155,8 @@
   .micromodal-slide .modal__overlay {
     will-change: transform;
   }
+
+  .swiper {
+    /* width: 600px; */
+    height: 300px;
+  }
