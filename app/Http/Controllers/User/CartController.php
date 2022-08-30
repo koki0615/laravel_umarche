@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class CartController extends Controller
 {
@@ -106,7 +107,7 @@ class CartController extends Controller
             ]],
             'mode' => 'payment',
             'success_url' => route('user.cart.success'),
-            'cancel_url' => route('user.cart.index'),
+            'cancel_url' => route('user.cart.cancel'),
         ]);
 
         $publicKey = env('STRIPE_PUBLIC_KEY');
@@ -119,5 +120,21 @@ class CartController extends Controller
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('user.items.index');
+    }
+
+    public function cancel()
+    {
+        $user = User::findOrFail(Auth::id());
+
+        foreach($user->products as $product){
+            Stock::create([
+                'product_id' => $product->id,
+                'type' => \Constant::PRODUCT_LIST['add'],
+                'quantity' => $product->pivot->quantity,
+            ]);
+        }
+
+        return redirect()->route('user.cart.index');
+
     }
 }
