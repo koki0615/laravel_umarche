@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\PrimaryCategory;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
+use App\Jobs\SendTahnksMail;
 
 class ItemController extends Controller
 {
@@ -34,8 +35,13 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         // dd($request);
-        Mail::to('test@test.com')
-        ->send(new TestMail());
+
+        //動機的に送信
+        // Mail::to('test@test.com')
+        // ->send(new TestMail());
+
+        //非同期に送信
+        SendTahnksMail::dispatch();
 
         $categories = PrimaryCategory::with('secondary')
         ->get();
