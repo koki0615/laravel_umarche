@@ -99,7 +99,7 @@
     })
 
     const paginate = document.getElementById('pagination')
-    select.addEventListener('change', function(){
+    paginate.addEventListener('change', function(){
         this.form.submit()
     })
 </script>
