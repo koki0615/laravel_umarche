@@ -139,7 +139,7 @@ class Product extends Model
             //単語をループで回す
             foreach($keywords as $word) 
             {
-            $query->where('products.name','like','%'.$word.'%');
+                $query->where('products.name','like','%'.$word.'%');
             }
             return $query; 
         } else {

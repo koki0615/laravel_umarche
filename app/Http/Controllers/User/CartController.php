@@ -10,6 +10,7 @@ use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\FuncCall;
 use App\Services\CartService;
+use App\Jobs\SendTahnksMail;
 
 class CartController extends Controller
 {
@@ -60,8 +61,14 @@ class CartController extends Controller
 
         ////
         $items = Cart::where('user_id', Auth::id())->get();
-        $products = CartService::getItemsCart($items);
+        $products = CartService::getItemsInCart($items);
+        $user = User::findOrFail(Auth::id());
+
+        SendTahnksMail::dispatch($products, $user);
+        dd('ユーザーメール送信テスト');
         ////
+
+        
 
 
         $user = User::findOrFail(Auth::id());

@@ -23,7 +23,6 @@ class ItemController extends Controller
             $id = $request->route()->parameter('item');
             if(!is_null($id)){
             $itemId = Product::availableItems()->where('products.id', $id)->exists();
-                $productId = (int)$itemId;
                 if(!$itemId) {
                     abort(404);
                 }
@@ -41,7 +40,7 @@ class ItemController extends Controller
         // ->send(new TestMail());
 
         //非同期に送信
-        SendTahnksMail::dispatch();
+        // SendTahnksMail::dispatch();
 
         $categories = PrimaryCategory::with('secondary')
         ->get();
